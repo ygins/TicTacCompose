@@ -1,4 +1,3 @@
-// Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -68,9 +67,14 @@ fun MenuButton(name: String, onClick: () -> Unit) {
 
 @Composable
 fun Help() {
-    Surface(color = MaterialTheme.colors.secondary, modifier=Modifier.fillMaxSize().padding(50.dp).wrapContentSize(align = Alignment.Center)){
-        Text("Click a box to place a symbol (X if you're player 1, or O if you're player 2). Three of your symbols in a row" +
-                " constitutes a win. If no more symbols can be placed, the game ends.", textAlign = TextAlign.Center)
+    Surface(
+        color = MaterialTheme.colors.secondary,
+        modifier = Modifier.fillMaxSize().padding(50.dp).wrapContentSize(align = Alignment.Center)
+    ) {
+        Text(
+            "Click a box to place a symbol (X if you're player 1, or O if you're player 2). Three of your symbols in a row" +
+                    " constitutes a win. If no more symbols can be placed, the game ends.", textAlign = TextAlign.Center
+        )
     }
 }
 
@@ -86,9 +90,9 @@ fun Game(gameState: GameState = rememberGameState()) {
         PlayerIndicators(gameState.currentPlayer)
         Spacer(modifier = Modifier.size(10.dp))
         TicTacToeGrid(gameState)
-        if(gameState.isWon()){
-            Spacer(modifier=Modifier.height(5.dp))
-            OutlinedButton(onClick={gameState.reset()}){
+        if (gameState.isWon()) {
+            Spacer(modifier = Modifier.height(5.dp))
+            OutlinedButton(onClick = { gameState.reset() }) {
                 Text("Restart")
             }
         }
@@ -100,7 +104,7 @@ fun TopText(gameState: GameState) {
     val win = gameState.winner != null
     val player = "Player ${if (gameState.currentPlayer == Player.ONE) 1 else 2}"
     val text = "$player${if (win) " won the game!" else ", it's your turn!"}"
-    Text(text, fontWeight=FontWeight.Bold)
+    Text(text, fontWeight = FontWeight.Bold)
 }
 
 @Composable
