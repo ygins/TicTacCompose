@@ -127,7 +127,7 @@ fun TicTacToeBox(gridState: GameState, index: Int) {
     ) {
         if (gridState[index] != SquareContent.EMPTY) {
             Text(
-                if (gridState[index] == SquareContent.ONE) "X" else "Y",
+                if (gridState[index] == SquareContent.ONE) "X" else "O",
                 textAlign = TextAlign.Center,
                 fontSize = 5.em,
                 fontWeight = FontWeight.ExtraBold,
