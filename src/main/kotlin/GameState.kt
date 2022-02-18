@@ -54,7 +54,7 @@ interface GameState {
     operator fun get(num: Int): SquareContent
     fun place(targetSquare: Int): PlaceResult
     fun reset()
-    fun isWon()=winner!=null
+    fun isOver()=winner!=null||(0..8).all { get(it)!=SquareContent.EMPTY }
     val currentPlayer: Player
     val winner: Player?
 }

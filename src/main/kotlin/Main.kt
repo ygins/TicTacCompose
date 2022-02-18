@@ -90,7 +90,7 @@ fun Game(gameState: GameState = rememberGameState()) {
         PlayerIndicators(gameState.currentPlayer)
         Spacer(modifier = Modifier.size(10.dp))
         TicTacToeGrid(gameState)
-        if (gameState.isWon()) {
+        if (gameState.isOver()) {
             Spacer(modifier = Modifier.height(5.dp))
             OutlinedButton(onClick = { gameState.reset() }) {
                 Text("Restart")
@@ -101,9 +101,10 @@ fun Game(gameState: GameState = rememberGameState()) {
 
 @Composable
 fun TopText(gameState: GameState) {
+    val gameOver=gameState.isOver()
     val win = gameState.winner != null
     val player = "Player ${if (gameState.currentPlayer == Player.ONE) 1 else 2}"
-    val text = "$player${if (win) " won the game!" else ", it's your turn!"}"
+    val text=if(win)"$player won the game!" else if(gameOver) "Stalemate" else "$player, it's your turn!"
     Text(text, fontWeight = FontWeight.Bold)
 }
 
@@ -125,8 +126,7 @@ fun TicTacToeBox(gridState: GameState, index: Int) {
     Box(
         modifier = Modifier.size(100.dp).border(2.dp, Color.Black)
             .background(Color.Yellow).clickable {
-                val result = gridState.place(index)
-                println(result)
+                gridState.place(index)
             }.wrapContentSize(Alignment.Center)
     ) {
         if (gridState[index] != SquareContent.EMPTY) {
